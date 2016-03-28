@@ -1,0 +1,20 @@
+{
+  "name": "Logger",
+  "version": "0.0.1",
+  "description": "Logger",
+  "main": "index.js",
+  "private": true,
+  "author": "Andrey Pavlov && Alexander Dadukin",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "dateformat": "^1.0.12",
+    "mkdirp": "^0.5.1",
+    "tracer": "^0.8.3",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "eslint": "2.5.3",
+    "eslint-config-airbnb": "6.2.0"
+  }
+}
