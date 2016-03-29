@@ -6,6 +6,9 @@
   "private": true,
   "author": "Andrey Pavlov && Alexander Dadukin",
   "license": "MIT",
+  "scripts": {
+    "test": "mocha test --reporter spec"
+  },
   "dependencies": {
     "colors": "^1.1.2",
     "dateformat": "^1.0.12",
@@ -14,7 +17,10 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "eslint": "2.5.3",
-    "eslint-config-airbnb": "6.2.0"
+    "eslint-config-airbnb": "6.2.0",
+    "mocha": "^2.4.5",
+    "rimraf": "^2.5.2"
   }
 }
