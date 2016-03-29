@@ -1,6 +1,6 @@
 {
   "name": "Logger",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Simple log util to control activity of your programm",
   "main": "index.js",
   "private": true,
