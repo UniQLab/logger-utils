@@ -1,7 +1,7 @@
 {
   "name": "logger-utils",
-  "version": "0.8.2",
-  "description": "Simple log util to control activity of your programm",
+  "version": "0.8.3",
+  "description": "Simple log util to control activity of your program",
   "main": "index.js",
   "author": "Andrey Pavlov && Alexander Dadukin",
   "keywords": ["log", "logger", "info", "warning", "error"],
