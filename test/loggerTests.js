@@ -50,7 +50,7 @@ function logsDirectoryRemover(done) {
 
 describe('Testing utils/directoryCreatorUtils', function() {
 
-    const directoryCreator = require('../lib/utils/directoryCreatorUtils');
+    const directoryCreator = require('../lib/utils/directoryUtils');
 
     describe('Testing directoryCreatorUtils.exist', function() {
 

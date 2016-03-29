@@ -1,7 +1,7 @@
 {
   "name": "Logger",
-  "version": "0.0.1",
-  "description": "Logger",
+  "version": "0.8.0",
+  "description": "Simple log util to control activity of your programm",
   "main": "index.js",
   "private": true,
   "author": "Andrey Pavlov && Alexander Dadukin",
@@ -10,17 +10,17 @@
     "test": "mocha test --reporter spec"
   },
   "dependencies": {
-    "colors": "^1.1.2",
-    "dateformat": "^1.0.12",
-    "mkdirp": "^0.5.1",
-    "tracer": "^0.8.3",
-    "underscore": "^1.8.3"
+    "colors": "1.1.2",
+    "dateformat": "1.0.12",
+    "mkdirp": "0.5.1",
+    "tracer": "0.8.3",
+    "underscore": "1.8.3"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "3.5.0",
     "eslint": "2.5.3",
     "eslint-config-airbnb": "6.2.0",
-    "mocha": "^2.4.5",
-    "rimraf": "^2.5.2"
+    "mocha": "2.4.5",
+    "rimraf": "2.5.2"
   }
 }
