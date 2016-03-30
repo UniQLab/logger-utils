@@ -6,6 +6,7 @@ const path = require('path');
 require('chai').should();
 const mkdirp = require('mkdirp');
 const rimraf = require('rimraf');
+const dateformat = require('dateformat');
 
 const pathToLogsFolder = path.join(__dirname, '../logs');
 
@@ -48,11 +49,11 @@ function logsDirectoryRemover(done) {
     });
 }
 
-describe('Testing utils/directoryCreatorUtils', function() {
+describe('Testing utils/directoryUtils', function() {
 
-    const directoryCreator = require('../lib/utils/directoryUtils');
+    const directoryUtils = require('../lib/utils/directoryUtils');
 
-    describe('Testing directoryCreatorUtils.exist', function() {
+    describe('Testing directoryUtils.exist', function() {
 
         afterEach(function(done) {
             logsDirectoryRemover(done);
@@ -66,7 +67,7 @@ describe('Testing utils/directoryCreatorUtils', function() {
                     throw err;
                 }
 
-                const exists = directoryCreator.exists(pathToCreate);
+                const exists = directoryUtils.exists(pathToCreate);
 
                 exists.should.be.true;
                 done();
@@ -81,7 +82,7 @@ describe('Testing utils/directoryCreatorUtils', function() {
                     throw err;
                 }
 
-                const exists = directoryCreator.exists(path.join(pathToCreate, '/doesnt/exist'));
+                const exists = directoryUtils.exists(path.join(pathToCreate, '/doesnt/exist'));
 
                 exists.should.be.false;
                 done();
@@ -90,7 +91,7 @@ describe('Testing utils/directoryCreatorUtils', function() {
 
     });
 
-    describe('Testing directoryCreatorUtils.create', function() {
+    describe('Testing directoryUtils.create', function() {
 
         afterEach(function(done) {
             logsDirectoryRemover(done);
@@ -99,7 +100,7 @@ describe('Testing utils/directoryCreatorUtils', function() {
         it('should create directory /logs/testing/directory/creation', function(done) {
             const pathToCreate = path.join(pathToLogsFolder, '/testing/directory/creation');
 
-            directoryCreator.create(pathToCreate);
+            directoryUtils.create(pathToCreate);
 
             checkIfExists(pathToCreate).then(exist => {
                 exist.should.be.true;
@@ -110,8 +111,7 @@ describe('Testing utils/directoryCreatorUtils', function() {
         it('should be okey if directory already exists', function(done) {
             const pathToCreate = pathToLogsFolder + '/testing/directory/creation';
 
-            directoryCreator.create(pathToCreate);
-            directoryCreator.create(pathToCreate);
+            directoryUtils.create(pathToCreate);
 
             checkIfExists(pathToCreate).then(exist => {
                 exist.should.be.true;
@@ -120,6 +120,47 @@ describe('Testing utils/directoryCreatorUtils', function() {
                 console.log(err);
                 done();
             });
+        });
+
+    });
+
+    describe('Testing directoryUtils.defineDirectoryName', function() {
+
+        it('should return a normalized path to logs directory with specified env and error type', function() {
+            const resultingPath = directoryUtils.defineDirectoryName(pathToLogsFolder, 'test', 'error');
+
+            resultingPath.should.be.equal(`${pathToLogsFolder}/test/error`);
+        });
+
+    });
+
+    describe('Testing directoryUtils.defineFileName', function() {
+
+        it('should return a filename for logs file, depending on prefix, dateFormat and extension', function() {
+            const resultingFileName = directoryUtils.defineFileName('log-', 'dd.mm.yy', '.log');
+
+            const newDate = new Date();
+
+            let year = newDate.getFullYear().toString();
+            let month = newDate.getMonth() + 1 + '';
+            let date = newDate.getDate().toString();
+
+            year = year.slice(2);
+
+            if (month.length < 2) month = 0 + month;
+            if (date.length < 2) date = 0 + date;
+
+            resultingFileName.should.be.equal(`log-${date}.${month}.${year}.log`);
+        });
+
+    });
+
+    describe('Testing directoryUtils.defineFilePath', function() {
+
+        it('should return a filePath for directory path and file name', function() {
+            const resultingFilePath = directoryUtils.defineFilePath(pathToLogsFolder, 'log-30.03.2016.log');
+
+            resultingFilePath.should.be.equal(`${pathToLogsFolder}/log-30.03.2016.log`);
         });
 
     });
