@@ -7,6 +7,5 @@ logger.debug('hello world!');
 logger.info('hello world2!');
 logger.error('hello world3!');
 
-
-const logger2 = loggerFactory.createErrorLogger('test', { pathToLogsFolder: __dirname, logIntoFile: true, logIntoConsole: true });
+const logger2 = loggerFactory.createErrorLogger(process.env.LOG, { pathToLogsFolder: __dirname, logIntoFile: true, logIntoConsole: true });
 logger2.error('hello world4!');
