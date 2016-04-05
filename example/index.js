@@ -1,11 +1,11 @@
 
 const loggerFactory = require('../');
-const logger = loggerFactory.createErrorLogger('test');
+const logger = loggerFactory.createRequestsLogger('test', __dirname);
 const path = require('path');
 
-logger.debug('hello world!');
+logger.info('hello world!');
 logger.info('hello world2!');
-logger.error('hello world3!');
+logger.info('hello world3!');
 
-const logger2 = loggerFactory.createErrorLogger(process.env.LOG, { pathToLogsFolder: __dirname, logIntoFile: true, logIntoConsole: true });
+const logger2 = loggerFactory.createErrorLogger(process.env.LOG || 'test', { logIntoFile: true, logIntoConsole: true });
 logger2.error('hello world4!');
