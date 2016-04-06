@@ -65,7 +65,7 @@ describe('Testing transports', function() {
     describe('Testing services/transportService', function() {
         const filePath = path.join(PATH_TO_LOGS_FOLDER, '/logsFile.log');
 
-        describe('testing transportService:constructor', function() {
+        describe('Testing transportService:constructor', function() {
             it('Should not add any transports if logToFile and logToConsole are false', function() {
                 const service = new TransportService(false, false);
 
@@ -107,7 +107,7 @@ describe('Testing transports', function() {
             });
         });
 
-        describe('testing transportService:all', function() {
+        describe('Testing transportService:all', function() {
             it('Should return 0 transports, when adding no file transports', function() {
                 const service = new TransportService(false, false);
 
@@ -130,7 +130,7 @@ describe('Testing transports', function() {
             });
         });
 
-        describe('testing transportService:_defineConsoleTransport', function() {
+        describe('Testing transportService:_defineConsoleTransport', function() {
             it('Should create a console transport', function() {
                 const service = new TransportService(false, false);
 
@@ -141,7 +141,7 @@ describe('Testing transports', function() {
             });
         });
 
-        describe('testing transportService:_defineFileTransport', function() {
+        describe('Testing transportService:_defineFileTransport', function() {
             it('Should create a file transport', function() {
                 const filePath = path.join(PATH_TO_LOGS_FOLDER, '/logsFile.log');
                 const service = new TransportService(false, false);
