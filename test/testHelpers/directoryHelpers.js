@@ -6,7 +6,7 @@ const rimraf = require('rimraf');
 
 const testingConfig = require('./testingConfig');
 
-const PATH_TO_LOGS_FOLDER = testingConfig.pathToLogsFolder;
+const PATH_TO_LOGS_FOLDER = testingConfig.PATH_TO_LOGS_FOLDER;
 
 module.exports = {
     checkIfExists(directory) {
