@@ -4,7 +4,7 @@
   "description": "Simple log util to control activity of your program",
   "main": "index.js",
   "author": "Andrey Pavlov && Alexander Dadukin",
-  "keywords": ["log", "logger", "info", "warning", "error"],
+  "keywords": ["log", "logger", "info", "warning", "warn", "error", "test", "debug", "production", "defaultLogger", "requestLogger", "errorLogger"],
 	"homepage": "https://github.com/sasd97/logger-utils",
 	"bugs": {
 		"url": "https://github.com/sasd97/logger-utils/issues"
