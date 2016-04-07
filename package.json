@@ -1,6 +1,6 @@
 {
   "name": "logger-utils",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "description": "Simple log util to control activity of your program",
   "main": "index.js",
   "author": "Andrey Pavlov && Alexander Dadukin",
@@ -27,9 +27,9 @@
   },
   "devDependencies": {
     "chai": "3.5.0",
-    "eslint": "2.5.3",
-    "eslint-config-airbnb": "6.2.0",
     "mocha": "2.4.5",
-    "rimraf": "2.5.2"
+    "rimraf": "2.5.2",
+    "eslint": "2.7.0",
+    "eslint-config-airbnb": "6.2.0"
   }
 }
