@@ -69,7 +69,6 @@ describe('Testing transports', function() {
             it('Should not add any transports if logToFile and logToConsole are false', function() {
                 const service = new TransportService(false, false);
 
-                console.log(service.transportStore.get());
                 service.transportStore.get().should.have.property('length').equal(0);
             });
             it('Should add only console transport if logToFile is false and logToConsole is true', function() {
