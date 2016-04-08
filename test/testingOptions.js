@@ -48,12 +48,12 @@ describe('Testing options', function() {
                 loggerDateFormat: 'MM',
                 fileNamePrefix: 'smth-',
                 fileNameExtension: '.txt',
-                logIntoConsole: false,
-                logIntoFile: true,
+                logIntoConsole: true,
+                logIntoFile: false,
                 logType: 'log'
             };
             it('Should create optionsService with default options', function () {
-                const optionsServiceInstance = new OptionsService({PATH_TO_LOGS_FOLDER});
+                const optionsServiceInstance = new OptionsService({pathToLogsFolder: PATH_TO_LOGS_FOLDER});
 
                 optionsServiceInstance.options.should.have.property('fileDateFormat').equals(logsConfig.fileDateFormat);
                 optionsServiceInstance.options.should.have.property('loggerDateFormat').equals(logsConfig.loggerDateFormat);
@@ -90,7 +90,7 @@ describe('Testing options', function() {
                 optionsServiceInstance.options.should.have.property('fileNamePrefix').equals(userOptions.fileNamePrefix);
                 optionsServiceInstance.options.should.have.property('fileNameExtension').equals(userOptions.fileNameExtension);
                 optionsServiceInstance.options.should.have.property('logIntoConsole').equals(userOptions.logIntoConsole);
-                optionsServiceInstance.options.should.have.property('logIntoFile').equals(logsConfig.logIntoFile);
+                optionsServiceInstance.options.should.have.property('logIntoFile').equals(userOptions.logIntoFile);
                 optionsServiceInstance.options.should.have.property('logType').equals(userOptions.logType);
             });
 
@@ -106,7 +106,7 @@ describe('Testing options', function() {
 
         describe('testing optionsService:set preprocessor', function () {
             it('should throw REPROCESSOR_NOT_A_FUNCTION error', function() {
-                const optionsServiceInstance = new OptionsService({PATH_TO_LOGS_FOLDER});
+                //const optionsServiceInstance = new OptionsService({PATH_TO_LOGS_FOLDER});
 
             });
         });

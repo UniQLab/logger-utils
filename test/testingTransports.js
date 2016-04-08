@@ -63,7 +63,12 @@ describe('Testing transports', function() {
     });
 
     describe('Testing services/transportService', function() {
-        const filePath = path.join(PATH_TO_LOGS_FOLDER, '/logsFile.log');
+
+        const folderMeta = {root: testingConfig.PATH_TO_LOGS_FOLDER};
+        const fileMeta = {
+            prefix: 'log-',
+            extension: '.log'
+        };
 
         describe('Testing transportService:constructor', function() {
             it('Should not add any transports if logToFile and logToConsole are false', function() {
@@ -82,7 +87,7 @@ describe('Testing transports', function() {
             });
             it('Should add only file transport if logToFile is true and logToConsole is false', function() {
 
-                const service = new TransportService(false, true, PATH_TO_LOGS_FOLDER, filePath);
+                const service = new TransportService(false, true, folderMeta, fileMeta);
 
                 service.transportStore.get().should.have.property('length').equal(1);
                 service.transportStore.get()[0].toString()
@@ -92,7 +97,7 @@ describe('Testing transports', function() {
             });
             it('Should add file transport and log transport', function() {
 
-                const service = new TransportService(true, true, PATH_TO_LOGS_FOLDER, filePath);
+                const service = new TransportService(true, true, folderMeta, fileMeta);
 
                 service.transportStore.get().should.have.property('length').equal(2);
                 service.transportStore.get()[0].toString()
@@ -118,12 +123,12 @@ describe('Testing transports', function() {
                 service.transportStore.get().should.have.property('length').equal(1);
             });
             it('Should return 1 transports when adding only file transport', function() {
-                const service = new TransportService(false, true, PATH_TO_LOGS_FOLDER, filePath);
+                const service = new TransportService(false, true, folderMeta, fileMeta);
 
                 service.transportStore.get().should.have.property('length').equal(1);
             });
             it('Should return 2 transports when adding both file transports', function() {
-                const service = new TransportService(true, true, PATH_TO_LOGS_FOLDER, filePath);
+                const service = new TransportService(true, true, folderMeta, fileMeta);
 
                 service.transportStore.get().should.have.property('length').equal(2);
             });
