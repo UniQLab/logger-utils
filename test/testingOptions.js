@@ -1,10 +1,12 @@
 'use strict';
 
 const colors = require('colors');
+const dateFormat = require('dateFormat');
 
 const errorsConfig = require('../lib/config/errors');
 const logsConfig = require('../lib/config/logs');
 const OptionsService = require('../lib/services/optionsService');
+const optionsUtils = require('../lib/utils/optionsUtils');
 const testingConfig = require('./testHelpers/testingConfig');
 
 const PATH_TO_LOGS_FOLDER = testingConfig.PATH_TO_LOGS_FOLDER;
@@ -13,7 +15,7 @@ describe('Testing options', function() {
 
     describe('Testing services/optionsService', function() {
 
-        describe('testing optionsService:constructor', function () {
+        describe('Testing optionsService:constructor', function () {
             const loggerOptions = {
                 fileDateFormat: 'mm.dd.yy',
                 loggerDateFormat: 'HH:MM',
@@ -96,18 +98,104 @@ describe('Testing options', function() {
 
             it('Should throw an error if logToFile is present and pathToLogsFolder - not', function () {
                 try {
-                    const optionsServiceInstance = new OptionsService({logIntoFile: true, directoryName: null});
+                    new OptionsService({logIntoFile: true, directoryName: null});
                 } catch (e) {
                     e.message.should.be.equal(errorsConfig.LOG_INTO_FILE_CONFLICT);
                 }
             });
         });
 
+        describe('Testing optionsService:set preprocessor', function () {
+            it('Should throw PREPROCESSOR_NOT_A_FUNCTION error', function() {
+                const optionsServiceInstance = new OptionsService({pathToLogsFolder: PATH_TO_LOGS_FOLDER});
 
-        describe('testing optionsService:set preprocessor', function () {
-            it('should throw REPROCESSOR_NOT_A_FUNCTION error', function() {
-                //const optionsServiceInstance = new OptionsService({PATH_TO_LOGS_FOLDER});
+                try {
+                    optionsServiceInstance.preprocessor = {};
+                } catch (e) {
+                    e.should.have.property('message').equals(errorsConfig.PREPROCESSOR_NOT_A_FUNCTION);
+                }
+            });
+        });
 
+        describe('Testing optionsService:_defineLevel', function () {
+            it('Should return a correct logging level depending on env', function() {
+                const optionsServiceInstance = new OptionsService({pathToLogsFolder: PATH_TO_LOGS_FOLDER});
+
+                optionsServiceInstance._defineLevel('test').should.be.a('string').equal('log');
+                optionsServiceInstance._defineLevel('dev').should.be.a('string').equal('warn');
+                optionsServiceInstance._defineLevel('prod').should.be.a('string').equal('error');
+            });
+        });
+
+        describe('Testing optionsService:_defineMiddleOptions', function () {
+            it('Should return a correct logging level depending on env', function() {
+                const options = {
+                    level: 'LOG',
+                    env: 'test',
+                    pathToLogsFolder: testingConfig.PATH_TO_LOGS_FOLDER,
+                    logType: 'error',
+                    fileNamePrefix: 'log-',
+                    fileDateFormat: 'dd.mm.yyyy',
+                    fileNameExtension: '.log'
+                };
+                const optionsServiceInstance = new OptionsService({pathToLogsFolder: PATH_TO_LOGS_FOLDER});
+                const result = optionsServiceInstance._defineMiddleOptions(options);
+                const folder = `${testingConfig.PATH_TO_LOGS_FOLDER}/${options.env}/${options.logType}`;
+                const fileName = `${options.fileNamePrefix}${ dateFormat(new Date(), options.fileDateFormat) }${options.fileNameExtension}`;
+
+                result.should.have.property('level');
+                result.should.have.property('directoryName').equals(folder);
+                result.should.have.property('fileName').equals(fileName);
+                result.should.have.property('filePath').equals(`${folder}/${fileName}`);
+            });
+        });
+
+        describe('Testing optionsService:_defineFinalOptions', function () {
+            it('Should return a correct logging level depending on env', function() {
+                const options = {
+                    level: 'LOG',
+                    env: 'test',
+                    pathToLogsFolder: testingConfig.PATH_TO_LOGS_FOLDER,
+                    logType: 'error',
+                    fileNamePrefix: 'log-',
+                    fileDateFormat: 'dd.mm.yyyy',
+                    fileNameExtension: '.log'
+                };
+                const optionsServiceInstance = new OptionsService({pathToLogsFolder: PATH_TO_LOGS_FOLDER});
+                const result = optionsServiceInstance._defineMiddleOptions(options);
+                const folder = `${testingConfig.PATH_TO_LOGS_FOLDER}/${options.env}/${options.logType}`;
+                const fileName = `${options.fileNamePrefix}${ dateFormat(new Date(), options.fileDateFormat) }${options.fileNameExtension}`;
+
+                result.should.have.property('level');
+                result.should.have.property('directoryName').equals(folder);
+                result.should.have.property('fileName').equals(fileName);
+                result.should.have.property('filePath').equals(`${folder}/${fileName}`);
+            });
+        });
+    });
+
+    describe('Testing utils/optionsUtils', function () {
+
+        describe('Testing optionsUtils:moveOptions', function () {
+            it('Should generate KEYS_NOT_ARRAY error', function() {
+                try {
+                    optionsUtils.moveOptions({}, {}, {});
+                } catch (e) {
+                    e.should.have.property('message').equals(errorsConfig.KEYS_NOT_ARRAYS);
+                }
+            });
+            it('Should generate KEYS_NOT_ARRAY error', function() {
+                const obj = {
+                    hello: 'world',
+                    morning: 'VIETNAM!',
+                    Luk: 'I AM YOUR FATHER!'
+                };
+                const objKeys = Object.keys(obj);
+                const objKeys2 = ['Alloha', 'Hawaii', 'friends'];
+
+                const result = optionsUtils.moveOptions(obj, objKeys, objKeys2);
+
+                objKeys2.forEach((key, i) => result.should.have.property(key).equals(obj[objKeys[i]]));
             });
         });
     });
