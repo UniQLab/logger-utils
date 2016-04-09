@@ -9,6 +9,12 @@ Simple log util to control activity of your program.
 
 Install it from [npm](https://www.npmjs.com/package/logger-utils) or check out the [wiki](https://github.com/sasd97/logger-utils/wiki) for documentation.
 
+## Installation
+
+```bash
+npm install logger-utils
+```
+
 ## Support
 
 Please, report bugs on the [issue tracker](https://github.com/sasd97/logger-utils/issues)
