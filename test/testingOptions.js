@@ -150,7 +150,7 @@ describe('Testing options', function() {
             });
         });
 
-        describe('Testing optionsService:_defineFinalOptions', function () {
+        describe('Testing optionsService:defineFinalOptions', function () {
             it('Should return a correct logging level depending on env', function() {
                 const options = {
                     level: 'LOG',
@@ -161,15 +161,16 @@ describe('Testing options', function() {
                     fileDateFormat: 'dd.mm.yyyy',
                     fileNameExtension: '.log'
                 };
-                const optionsServiceInstance = new OptionsService({pathToLogsFolder: PATH_TO_LOGS_FOLDER});
-                const result = optionsServiceInstance._defineMiddleOptions(options);
-                const folder = `${testingConfig.PATH_TO_LOGS_FOLDER}/${options.env}/${options.logType}`;
-                const fileName = `${options.fileNamePrefix}${ dateFormat(new Date(), options.fileDateFormat) }${options.fileNameExtension}`;
 
-                result.should.have.property('level');
-                result.should.have.property('directoryName').equals(folder);
-                result.should.have.property('fileName').equals(fileName);
-                result.should.have.property('filePath').equals(`${folder}/${fileName}`);
+                const optionsServiceInstance = new OptionsService({pathToLogsFolder: PATH_TO_LOGS_FOLDER});
+                const result = optionsServiceInstance.defineFinalOptions(options);
+
+                result.should.have.property('format').which.is.an('array');
+                result.should.have.property('filters').which.is.an('object');
+                result.should.have.property('dateFormat').equals(undefined);
+                result.should.have.property('preprocessor').equals(undefined);
+                result.should.have.property('level').equals('log');
+                result.should.have.property('transport').which.is.an('array');
             });
         });
     });
