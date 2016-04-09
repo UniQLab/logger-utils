@@ -11,7 +11,7 @@ Install it from [npm](https://www.npmjs.com/package/logger-utils) or check out t
 
 ## Installation
 
-```bash
+```{r, engine='bash', count_lines}
 npm install logger-utils
 ```
 
