@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/logger-utils.svg)](https://npmjs.com/package/logger-utils)
 [![npm downloads](https://img.shields.io/npm/dm/logger-utils.svg)](https://npmjs.com/package/logger-utils)
-[![dependencies](https://david-dm.org/UndefinedLab/logger-utils.svg)](https://david-dm.org/sasd97/logger-utils)
+[![dependencies](https://david-dm.org/UndefinedLab/logger-utils.svg)](https://david-dm.org/UndefinedLab/logger-utils)
 [![license](https://img.shields.io/npm/l/logger-utils.svg)](https://github.com/sasd97/logger-utils/blob/master/LICENSE)
 
 Simple log util to control activity of your program.
